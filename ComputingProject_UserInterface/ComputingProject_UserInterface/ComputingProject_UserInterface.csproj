@@ -50,9 +50,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ComputingProject, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ComputingProject\ComputingProject\bin\Debug\ComputingProject.dll</HintPath>
+    <Reference Include="ComputingProject">
+      <HintPath>C:\Users\Dan\Documents\Visual Studio 2015\Projects\ComputingProject\ComputingProject\bin\Debug\ComputingProject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

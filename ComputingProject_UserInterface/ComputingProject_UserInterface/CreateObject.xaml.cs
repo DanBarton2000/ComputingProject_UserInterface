@@ -39,15 +39,22 @@ namespace ComputingProject_UserInterface {
             switch (objectTypeString) {
                 case "Planet":
                     // Create a new planet object
-                    new CelestialObject(name, mass, velocity, position, null, new CircleCollider(position, 40));
+                    CelestialObject obj = new CelestialObject(name, mass, velocity, position, new CircleCollider(position, 40));
                     break;
                 case "Star":
                     // Create a new star object
-                    new Star();
+                    Star star = new Star(name, mass, velocity, position, new CircleCollider(position, 40));
                     break;
                 default:
                     // Should never reach here
                     break;
+            }
+
+            foreach (Window window in Application.Current.Windows) {
+                if (window.GetType() == typeof(MainWindow)) {
+                    ((MainWindow)window).ObjectsView.SelectedItem = null;
+                    ((MainWindow)window).ObjectsView.SelectedItem = ObjectManager.AllObjects;
+                }
             }
         }
     }
