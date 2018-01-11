@@ -20,9 +20,9 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem x:Name="FileDropDown" Header="File">
-                    <MenuItem Header="Save" />
-                    <MenuItem Header="Open" />
-                    <MenuItem Header="Create object" />
+                    <MenuItem Header="Save" Click="Save_Click"/>
+                    <MenuItem Header="Open" Click="Open_Click"/>
+                    <MenuItem Header="Create object" Click="CreateObject_Click"/>
                     <Separator />
                     <MenuItem Header="Exit" />
                 </MenuItem>
@@ -30,7 +30,7 @@
         </DockPanel>
         <Canvas Name="Simulation" Background="Black" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Stretch" MaxHeight="699" MaxWidth="1613">
         </Canvas>
-        <ListView x:Name="ObjectsView" Grid.Column="2" HorizontalAlignment="Left" Height="463" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="275" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+        <ListView x:Name="ObjectsView" x:FieldModifier="public" Grid.Column="2" HorizontalAlignment="Left" Height="463" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="275" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -58,5 +58,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="pause" Content="Pause" Grid.Column="2" HorizontalAlignment="Left" Margin="60,117,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Pause_Click"/>
+        <Button x:Name="play" Content="Play" Grid.Column="2" HorizontalAlignment="Left" Margin="160,117,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Play_Click"/>
     </Grid>
 </Window>

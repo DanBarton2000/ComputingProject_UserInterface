@@ -46,6 +46,8 @@ namespace ComputingProject_UserInterface {
 
         Vector2 centre;
 
+        public int objectSize = 20;
+
         public MainWindow() {
             InitializeComponent();
 
@@ -82,16 +84,17 @@ namespace ComputingProject_UserInterface {
         }
 
         void AddObjects() {
-            CircleCollider cc = new CircleCollider(new Vector2(), 40);
+            CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10000, 0), new Vector2(Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), null, cc);
-            CelestialObject sun = new CelestialObject("Sun", 1E40, new Vector2(0, 0), new Vector2(Constants.AstronomicalUnit, Constants.AstronomicalUnit), null, cc);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10000, 0), new Vector2(2 *Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), null, cc);
+            CelestialObject sun = new CelestialObject("Sun", 1E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), null, cc);
             //CelestialObject sun1 = new CelestialObject("Sun1", Constants.SolarMass, new Vector2(0, 0), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
         }
 
         void SetDebugTools() {
-            DebugTools.DebugMode = true;
+            DebugTools.DebugMode = false;
             DebugTools.UseCollision = true;
+            DebugTools.PrintCollisionVelocities = true;
         }
 
         void Draw(IQuadtreeObject obj, int size) {
@@ -110,7 +113,7 @@ namespace ComputingProject_UserInterface {
             Simulation.Children.Clear();
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
                 //Console.WriteLine("Screen Position: " + obj.screenPosition.ToString());
-                Draw(obj, 20);
+                Draw(obj, objectSize);
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
             }
@@ -174,6 +177,24 @@ namespace ComputingProject_UserInterface {
         void Advanced_Click(object sender, EventArgs e) {
             CreateObject co = new CreateObject();
             co.Show();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e) {
+            Save.WriteXML("test");
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e) {
+            // List<CelestialObject> objects = Load.ReadXML("test");
+            // ObjectManager.ClearObjects();
+            // ObjectManager.AddRange(objects);
+        }
+
+        private void Pause_Click(object sender, RoutedEventArgs e) {
+            timeController.Pause();
+        }
+
+        private void Play_Click(object sender, RoutedEventArgs e) {
+            timeController.UnPause();
         }
     }
 }

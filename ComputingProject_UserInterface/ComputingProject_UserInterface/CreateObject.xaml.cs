@@ -33,16 +33,20 @@ namespace ComputingProject_UserInterface {
 
             string objectTypeString = ObjectTypeCombo.Text;
 
+            // Turn the screen position into world coordinates
             position /= MainWindow.scale;
 
             switch (objectTypeString) {
                 case "Planet":
+                    // Create a new planet object
                     new CelestialObject(name, mass, velocity, position, null, new CircleCollider(position, 40));
                     break;
                 case "Star":
+                    // Create a new star object
                     new Star();
                     break;
                 default:
+                    // Should never reach here
                     break;
             }
         }
