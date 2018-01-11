@@ -26,7 +26,7 @@ namespace ComputingProject_UserInterface {
 
         int milliseconds = 1000 / 60;
         public static double scale = 250 / Constants.AstronomicalUnit;
-        public static double totalTime = 0;
+        public static uint totalTime = 0;
 
         enum TimeSteps {
             Second = 1,
@@ -118,7 +118,7 @@ namespace ComputingProject_UserInterface {
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
 
-                totalTime += timeController.currentTimeStep;
+                totalTime += (uint)timeController.currentTimeStep;
 
                 // Update the advanced windows
                 foreach (Window window in Application.Current.Windows) {

@@ -25,20 +25,20 @@ namespace ComputingProject_UserInterface
         }
 
         public void CalculateTime() {
-            int totalTime = (int)MainWindow.totalTime;
-            int days = totalTime / (24 * 3600);
+            uint totalTime = MainWindow.totalTime;
+            uint days = totalTime / (24 * 3600);
 
             totalTime %= (24 * 3600);
 
-            int hour = totalTime / 3600;
+            uint hour = totalTime / 3600;
 
             totalTime %= 3600;
 
-            int minutes = totalTime / 60;
+            uint minutes = totalTime / 60;
 
             totalTime %= 60;
 
-            int seconds = totalTime;
+            uint seconds = totalTime;
 
             Time.Content = "Total Time - D: " + days + " H: " + " M: " + minutes + " S: " + seconds;
         }
