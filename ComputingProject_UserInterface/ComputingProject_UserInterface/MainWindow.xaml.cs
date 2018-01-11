@@ -207,5 +207,9 @@ namespace ComputingProject_UserInterface {
         private void Play_Click(object sender, RoutedEventArgs e) {
             timeController.UnPause();
         }
+
+        private void TimesTwo_Click(object sender, RoutedEventArgs e) {
+            timeController.SpeedUp(2);
+        }
     }
 }
