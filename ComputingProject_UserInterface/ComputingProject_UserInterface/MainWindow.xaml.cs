@@ -25,7 +25,7 @@ namespace ComputingProject_UserInterface {
     public partial class MainWindow : Window {
 
         int milliseconds = 1000 / 60;
-        double scale = 250 / Constants.AstronomicalUnit;
+        public static double scale = 250 / Constants.AstronomicalUnit;
 
         enum TimeSteps {
             Second = 1,
@@ -59,6 +59,8 @@ namespace ComputingProject_UserInterface {
 
             screen = new QuadTree<IQuadtreeObject>(new AABB(centre, centre));
 
+            Console.WriteLine(screen.Boundary.ToString());
+
             AddObjects();
 
             ObjectsView.ItemsSource = ObjectManager.AllObjects;
@@ -82,9 +84,9 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), 40);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(1500, 0), new Vector2(2 * Constants.AstronomicalUnit, 0.5 * Constants.AstronomicalUnit), null, cc);
-            CelestialObject sun = new CelestialObject("Sun", 6E30, new Vector2(500, 400), new Vector2(Constants.AstronomicalUnit, Constants.AstronomicalUnit), null, cc);
-            CelestialObject sun1 = new CelestialObject("Sun1", 6E30, new Vector2(200, 300), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10000, 0), new Vector2(Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), null, cc);
+            CelestialObject sun = new CelestialObject("Sun", 1E40, new Vector2(0, 0), new Vector2(Constants.AstronomicalUnit, Constants.AstronomicalUnit), null, cc);
+            //CelestialObject sun1 = new CelestialObject("Sun1", Constants.SolarMass, new Vector2(0, 0), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
         }
 
         void SetDebugTools() {
@@ -108,7 +110,7 @@ namespace ComputingProject_UserInterface {
             Simulation.Children.Clear();
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
                 //Console.WriteLine("Screen Position: " + obj.screenPosition.ToString());
-                Draw(obj, 40);
+                Draw(obj, 20);
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
             }
@@ -130,13 +132,25 @@ namespace ComputingProject_UserInterface {
         }
 
         void CreateObject_Click(object sender, EventArgs e) {
-            CreateObject co = new CreateObject();
-            co.Show();
+            CreateObject createObject = new CreateObject();
+            createObject.Show();
         }
 
         void EditObject_Click(object sender, EventArgs e) {
-            CreateObject co = new CreateObject();
-            co.Show();
+            CelestialObject obj = (CelestialObject)ObjectsView.SelectedItem;
+            if (obj != null) {
+                EditObject editObject = new EditObject();
+                editObject.Show();
+                editObject.NameTextBox.Text = obj.Name;
+                editObject.MassTextBox.Text = obj.Mass.ToString();
+                editObject.PositionXTextBox.Text = obj.screenPosition.x.ToString("G4");
+                editObject.PositionYTextBox.Text = obj.screenPosition.y.ToString("G4");
+                editObject.VelocityXTextBox.Text = obj.velocity.x.ToString("G3");
+                editObject.VelocityYTextBox.Text = obj.velocity.y.ToString("G3");
+            }
+            else {
+                MessageBox.Show("Please select an object.");
+            }
         }
 
         void DeleteObject_Click(object sender, EventArgs e) {
