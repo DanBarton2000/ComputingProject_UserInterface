@@ -39,6 +39,8 @@ namespace ComputingProject_UserInterface {
                     }
                 }
             }
+            // Close the window down
+            Close();
         }
     }
 }

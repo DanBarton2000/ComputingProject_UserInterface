@@ -26,6 +26,7 @@ namespace ComputingProject_UserInterface {
 
         int milliseconds = 1000 / 60;
         public static double scale = 250 / Constants.AstronomicalUnit;
+        public static double totalTime = 0;
 
         enum TimeSteps {
             Second = 1,
@@ -116,6 +117,16 @@ namespace ComputingProject_UserInterface {
                 Draw(obj, objectSize);
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
+
+                totalTime += timeController.currentTimeStep;
+
+                // Update the advanced windows
+                foreach (Window window in Application.Current.Windows) {
+                    if (window.GetType() == typeof(Advanced)) {
+                        Advanced advanced = (Advanced)window;
+                        advanced.CalculateTime();
+                    }
+                }
             }
         }
 
@@ -175,8 +186,8 @@ namespace ComputingProject_UserInterface {
         }
 
         void Advanced_Click(object sender, EventArgs e) {
-            CreateObject co = new CreateObject();
-            co.Show();
+            Advanced advanced = new Advanced();
+            advanced.Show();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {
