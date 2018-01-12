@@ -87,8 +87,8 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10000, 0), new Vector2(2 *Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc);
-            CelestialObject sun = new CelestialObject("Sun", 1E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc);
+            CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc);
             //CelestialObject sun1 = new CelestialObject("Sun1", Constants.SolarMass, new Vector2(0, 0), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
         }
 

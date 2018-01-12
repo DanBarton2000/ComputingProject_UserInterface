@@ -25,6 +25,11 @@ namespace ComputingProject_UserInterface {
         }
 
         private void CreateObjectButton_Click(object sender, RoutedEventArgs e) {
+            if (TestInputForEmpty()) {
+                MessageBox.Show("Invalid input.");
+                return;
+            }
+
             string name = NameTextBox.Text;
             double mass = double.Parse(MassTextBox.Text);
             // Screen position
@@ -56,6 +61,17 @@ namespace ComputingProject_UserInterface {
                     ((MainWindow)window).ObjectsView.SelectedItem = ObjectManager.AllObjects;
                 }
             }
+
+            Close();
+        }
+
+        bool TestInputForEmpty() {
+            if (NameTextBox.Text == "" || MassTextBox.Text == "" || PositionXTextBox.Text == "" || PositionYTextBox.Text == ""
+                || VelocityXTextBox.Text == "" || VelocityYTextBox.Text == "") {
+                return true;
+            }
+
+            return false;
         }
     }
 }

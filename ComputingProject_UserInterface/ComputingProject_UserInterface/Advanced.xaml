@@ -9,5 +9,7 @@
 
     <Grid Background="White">
         <Label x:Name="Time" Content="Time: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Scale" Content="Scale: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,59,0,0"/>
+        <Slider x:Name="ScaleSlider" HorizontalAlignment="Left" Margin="48,63,0,0" VerticalAlignment="Top" Width="186" Value="250" Maximum="500" ValueChanged="Scale_ValueChanged"/>
     </Grid>
 </Window>

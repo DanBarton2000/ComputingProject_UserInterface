@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ComputingProject;
 
 namespace ComputingProject_UserInterface
 {
@@ -41,6 +42,10 @@ namespace ComputingProject_UserInterface
             uint seconds = totalTime;
 
             Time.Content = "Total Time - D: " + days + " H: " + " M: " + minutes + " S: " + seconds;
+        }
+
+        private void Scale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            MainWindow.scale = ScaleSlider.Value / Constants.AstronomicalUnit;
         }
     }
 }
