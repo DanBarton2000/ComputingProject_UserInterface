@@ -57,8 +57,8 @@ namespace ComputingProject_UserInterface {
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
-                    ((MainWindow)window).ObjectsView.SelectedItem = null;
-                    ((MainWindow)window).ObjectsView.SelectedItem = ObjectManager.AllObjects;
+                    ((MainWindow)window).ObjectsView.ItemsSource = null;
+                    ((MainWindow)window).ObjectsView.ItemsSource = ObjectManager.AllObjects;
                 }
             }
 
