@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ComputingProject_UserInterface"
       mc:Ignorable="d"
-      Title="Advanced" Height="282" Width="210" ResizeMode="NoResize">
+      Title="Advanced" Height="282" Width="250" ResizeMode="NoResize">
 
     <Grid Background="White">
         <Label x:Name="Time" Content="Time: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
