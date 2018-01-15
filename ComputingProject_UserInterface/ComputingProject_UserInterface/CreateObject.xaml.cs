@@ -44,11 +44,11 @@ namespace ComputingProject_UserInterface {
             switch (objectTypeString) {
                 case "Planet":
                     // Create a new planet object
-                    CelestialObject obj = new CelestialObject(name, mass, velocity, position, new CircleCollider(position, 40));
+                    CelestialObject obj = new CelestialObject(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals());
                     break;
                 case "Star":
                     // Create a new star object
-                    Star star = new Star(name, mass, velocity, position, new CircleCollider(position, 40));
+                    Star star = new Star(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals());
                     break;
                 default:
                     // Should never reach here
@@ -57,6 +57,7 @@ namespace ComputingProject_UserInterface {
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
+                    // Update the UI
                     ((MainWindow)window).ObjectsView.ItemsSource = null;
                     ((MainWindow)window).ObjectsView.ItemsSource = ObjectManager.AllObjects;
                 }

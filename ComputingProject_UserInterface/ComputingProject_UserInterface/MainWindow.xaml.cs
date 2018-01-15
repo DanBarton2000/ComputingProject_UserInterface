@@ -87,8 +87,17 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc);
-            CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc);
+            ObjectVisuals earthVis = new ObjectVisuals();
+            ObjectVisuals sunVis = new ObjectVisuals();
+
+            earthVis.colour = Brushes.Blue;
+            earthVis.size = 30;
+
+            sunVis.colour = Brushes.Yellow;
+            sunVis.size = 80;
+
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
+            CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
             //CelestialObject sun1 = new CelestialObject("Sun1", Constants.SolarMass, new Vector2(0, 0), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
         }
 
@@ -100,12 +109,12 @@ namespace ComputingProject_UserInterface {
 
         void Draw(IQuadtreeObject obj, int size) {
             Ellipse circle = new Ellipse();
-            circle.Fill = Brushes.White;
+            circle.Fill = obj.visuals.colour;
             circle.Height = size;
             circle.Width = size;
 
-            Canvas.SetTop(circle, obj.screenPosition.y);
-            Canvas.SetLeft(circle, obj.screenPosition.x);
+            Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
+            Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2));
 
             Simulation.Children.Add(circle);
         }
@@ -114,7 +123,7 @@ namespace ComputingProject_UserInterface {
             Simulation.Children.Clear();
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
                 //Console.WriteLine("Screen Position: " + obj.screenPosition.ToString());
-                Draw(obj, objectSize);
+                Draw(obj, obj.visuals.size);
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
 
@@ -195,9 +204,9 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
-            // List<CelestialObject> objects = Load.ReadXML("test");
-            // ObjectManager.ClearObjects();
-            // ObjectManager.AddRange(objects);
+            List<IQuadtreeObject> objects = Load.ReadXML("test");
+            ObjectManager.ClearObjects();
+            ObjectManager.AddRange(objects);
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e) {
@@ -206,6 +215,7 @@ namespace ComputingProject_UserInterface {
 
         private void Play_Click(object sender, RoutedEventArgs e) {
             timeController.UnPause();
+            timeController.DefaultSpeed();
         }
 
         private void TimesTwo_Click(object sender, RoutedEventArgs e) {
