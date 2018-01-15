@@ -58,9 +58,9 @@ namespace ComputingProject_UserInterface {
             screenWidth = Simulation.MaxWidth;
             screenHeight = Simulation.MaxHeight;
 
-            centre = new Vector2(screenWidth, screenHeight) / 2;
+            centre = new Vector2(screenWidth, screenHeight);
 
-            screen = new QuadTree<IQuadtreeObject>(new AABB(centre, centre));
+            screen = new QuadTree<IQuadtreeObject>(new AABB(centre/2, centre/2));
 
             Console.WriteLine(screen.Boundary.ToString());
 
@@ -87,14 +87,8 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
-            ObjectVisuals earthVis = new ObjectVisuals();
-            ObjectVisuals sunVis = new ObjectVisuals();
-
-            earthVis.colour = Brushes.Blue;
-            earthVis.size = 30;
-
-            sunVis.colour = Brushes.Yellow;
-            sunVis.size = 80;
+            ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 30);
+            ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 80);
 
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
             CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
@@ -113,10 +107,11 @@ namespace ComputingProject_UserInterface {
             circle.Height = size;
             circle.Width = size;
 
-            Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
-            Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2));
-
-            Simulation.Children.Add(circle);
+            if (obj.screenPosition.x + (size / 2) < centre.x && obj.screenPosition.y + (size / 2) < centre.y) {
+                Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
+                Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2));
+                Simulation.Children.Add(circle);
+            }
         }
 
         void timer_Tick(object sender, EventArgs e) {
