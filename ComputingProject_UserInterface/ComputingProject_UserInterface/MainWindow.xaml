@@ -44,10 +44,10 @@
         <Button x:Name="EditObject" Content="Edit Object" Grid.Column="2" Margin="60,0,60,114" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="EditObject_Click"/>
         <Button x:Name="DeleteObject" Content="Delete Object" Grid.Column="2" Margin="60,0,60,66" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="DeleteObject_Click"/>
         <Button x:Name="Advanced" Content="Advanced" Grid.Column="2" Margin="60,0,60,18" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="Advanced_Click"/>
-        <ListView x:Name="ObjectsViewVelocityPosition" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="1585" Grid.Column="1" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+        <ListView x:Name="ObjectsViewVelocityPosition" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="1585" Grid.Column="1" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Focusable="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <WrapPanel Focusable="False">
                         <TextBlock Text="Name: "/>
                         <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text=" Screen Position: "/>

@@ -37,8 +37,12 @@ namespace ComputingProject_UserInterface {
                             quadObject.Mass = double.Parse(MassTextBox.Text);
                         }
                     }
+
+                    ((MainWindow)window).ObjectsView.ItemsSource = null;
+                    ((MainWindow)window).ObjectsView.ItemsSource = ObjectManager.AllObjects;
                 }
             }
+
             // Close the window down
             Close();
         }

@@ -107,7 +107,7 @@ namespace ComputingProject_UserInterface {
             circle.Height = size;
             circle.Width = size;
 
-            if (obj.screenPosition.x + (size / 2) < centre.x && obj.screenPosition.y + (size / 2) < centre.y) {
+            if (obj.screenPosition.x + (size) < centre.x && obj.screenPosition.y + (size) < centre.y) {
                 Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
                 Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2));
                 Simulation.Children.Add(circle);
