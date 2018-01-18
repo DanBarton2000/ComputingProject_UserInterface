@@ -38,8 +38,20 @@ namespace ComputingProject_UserInterface {
 
             string objectTypeString = ObjectTypeCombo.Text;
 
+            // Make sure that the user input is in a format that can be used
+            if (!IsValidInput(name, mass, position, velocity)) {
+                return;
+            }
+
             // Turn the screen position into world coordinates
             position /= MainWindow.scale;
+
+            foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
+                if (obj.position == position) {
+                    MessageBox.Show("Object already at that positon!");
+                    return;
+                }
+            }
 
             switch (objectTypeString) {
                 case "Planet":
@@ -73,6 +85,23 @@ namespace ComputingProject_UserInterface {
             }
 
             return false;
+        }
+
+        bool IsValidInput(string name, double mass, Vector2 position, Vector2 velocity) {
+            if (mass < 1) {
+                MessageBox.Show("Mass is too low!");
+                return false;
+            }
+            else if (position == null) {
+                MessageBox.Show("Position is invalid!");
+                return false;
+            }
+            else if (velocity == null) {
+                MessageBox.Show("Velocity is invalid");
+                return false;
+            }
+
+            return true;
         }
     }
 }
