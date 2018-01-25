@@ -199,12 +199,10 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
-            List<CelestialObject> objects = Load.ReadXML("test");
+            List<IQuadtreeObject> objects = Load.ReadXML("test");
             ObjectManager.ClearObjects();
 
-            if (objects != null) {
-                objects.ForEach(x => ObjectManager.AddObject(x));
-            }
+            ObjectManager.AddRange(objects);
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e) {
