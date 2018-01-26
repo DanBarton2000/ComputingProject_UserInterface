@@ -92,7 +92,6 @@ namespace ComputingProject_UserInterface {
 
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
             CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
-            //CelestialObject sun1 = new CelestialObject("Sun1", Constants.SolarMass, new Vector2(0, 0), new Vector2(3 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), null, cc);
         }
 
         void SetDebugTools() {
