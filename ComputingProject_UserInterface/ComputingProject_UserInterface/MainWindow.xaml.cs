@@ -199,10 +199,13 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
-            List<IQuadtreeObject> objects = Load.ReadXML("test");
+            List<CelestialObject> objects = Load.ReadXML("test");
             ObjectManager.ClearObjects();
 
-            ObjectManager.AddRange(objects);
+            objects.ForEach(x => ObjectManager.AddObject(x));
+
+            ObjectsView.ItemsSource = null;
+            ObjectsView.ItemsSource = ObjectManager.AllObjects;
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e) {
@@ -212,10 +215,6 @@ namespace ComputingProject_UserInterface {
         private void Play_Click(object sender, RoutedEventArgs e) {
             timeController.UnPause();
             timeController.DefaultSpeed();
-        }
-
-        private void TimesTwo_Click(object sender, RoutedEventArgs e) {
-            timeController.SpeedUp(2);
         }
     }
 }
