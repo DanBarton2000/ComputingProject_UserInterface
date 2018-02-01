@@ -35,6 +35,14 @@ namespace ComputingProject_UserInterface {
                             Vector2 screenPosition = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
                             quadObject.position = screenPosition / MainWindow.scale;
                             quadObject.Mass = double.Parse(MassTextBox.Text);
+
+                            try {
+                                obj.visuals.colour = (SolidColorBrush)new BrushConverter().ConvertFromString(ColourTextBox.Text.ToUpper());
+                            }
+                            catch (Exception) {
+                                MessageBox.Show("Invalid hex");
+                                return;
+                            }
                         }
                     }
 
