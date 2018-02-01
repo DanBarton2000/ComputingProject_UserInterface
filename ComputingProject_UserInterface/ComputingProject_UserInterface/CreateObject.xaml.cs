@@ -32,11 +32,25 @@ namespace ComputingProject_UserInterface {
 
             string name = NameTextBox.Text;
             double mass = double.Parse(MassTextBox.Text);
+            string hex = ColourTextBox.Text.ToUpper();
             // Screen position
             Vector2 position = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
             Vector2 velocity = new Vector2(double.Parse(VelocityXTextBox.Text), double.Parse(VelocityYTextBox.Text));
 
             string objectTypeString = ObjectTypeCombo.Text;
+
+            // Hard coded size
+            int size = 5;
+
+            SolidColorBrush colour;
+
+            try {
+                colour = (SolidColorBrush)new BrushConverter().ConvertFromString("#" + hex);
+            }
+            catch (Exception) {
+                MessageBox.Show("Invalid hex");
+                return;
+            }
 
             // Make sure that the user input is in a format that can be used
             if (!IsValidInput(name, mass, position, velocity)) {
@@ -56,11 +70,11 @@ namespace ComputingProject_UserInterface {
             switch (objectTypeString) {
                 case "Planet":
                     // Create a new planet object
-                    CelestialObject obj = new CelestialObject(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals());
+                    CelestialObject obj = new CelestialObject(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals(colour, size));
                     break;
                 case "Star":
                     // Create a new star object
-                    Star star = new Star(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals());
+                    Star star = new Star(name, mass, velocity, position, new CircleCollider(position, 40), new ObjectVisuals(colour, size));
                     break;
                 default:
                     // Should never reach here
@@ -80,7 +94,7 @@ namespace ComputingProject_UserInterface {
 
         bool TestInputForEmpty() {
             if (NameTextBox.Text == "" || MassTextBox.Text == "" || PositionXTextBox.Text == "" || PositionYTextBox.Text == ""
-                || VelocityXTextBox.Text == "" || VelocityYTextBox.Text == "") {
+                || VelocityXTextBox.Text == "" || VelocityYTextBox.Text == "" || ColourTextBox.Text == "") {
                 return true;
             }
 
