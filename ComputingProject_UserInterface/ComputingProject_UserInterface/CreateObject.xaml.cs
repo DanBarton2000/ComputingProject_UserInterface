@@ -26,7 +26,7 @@ namespace ComputingProject_UserInterface {
 
         private void CreateObjectButton_Click(object sender, RoutedEventArgs e) {
             if (TestInputForEmpty()) {
-                MessageBox.Show("Invalid input.");
+                MessageBox.Show("Text boxes cannot be empty!");
                 return;
             }
 
@@ -97,7 +97,15 @@ namespace ComputingProject_UserInterface {
                 return false;
             }
             else if (velocity == null) {
-                MessageBox.Show("Velocity is invalid");
+                MessageBox.Show("Velocity is invalid!");
+                return false;
+            }
+            else if (position.x < 0) {
+                MessageBox.Show("Position X is negative!");
+                return false;
+            }
+            else if (position.y < 0) {
+                MessageBox.Show("Position Y is negative!");
                 return false;
             }
 
