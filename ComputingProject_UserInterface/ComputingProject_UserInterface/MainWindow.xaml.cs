@@ -103,8 +103,8 @@ namespace ComputingProject_UserInterface {
         void Draw(IQuadtreeObject obj, int size) {
             Ellipse circle = new Ellipse();
             circle.Fill = obj.visuals.colour;
-            circle.Height = size;
-            circle.Width = size;
+            circle.Height = obj.visuals.size;
+            circle.Width = obj.visuals.size;
 
             if (obj.screenPosition.x + obj.visuals.size < centre.x && obj.screenPosition.y + obj.visuals.size < centre.y) {
                 Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
@@ -121,7 +121,7 @@ namespace ComputingProject_UserInterface {
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
 
-                totalTime += (uint)timeController.currentTimeStep;
+                totalTime += (uint)Math.Abs(timeController.currentTimeStep);
 
                 // Update the advanced windows
                 foreach (Window window in Application.Current.Windows) {
