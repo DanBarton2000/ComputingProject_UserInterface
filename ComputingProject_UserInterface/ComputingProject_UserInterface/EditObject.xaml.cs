@@ -85,7 +85,7 @@ namespace ComputingProject_UserInterface {
                 return false;
             }
 
-            return false;
+            return true;
         }
     }
 }
