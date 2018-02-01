@@ -91,7 +91,8 @@ namespace ComputingProject_UserInterface {
             ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 80);
 
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
-            CelestialObject sun = new CelestialObject("Sun", 2E40, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
+            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
+            MessageBox.Show(sun.LifeTime().ToString());
         }
 
         void SetDebugTools() {
@@ -154,17 +155,26 @@ namespace ComputingProject_UserInterface {
         }
 
         void EditObject_Click(object sender, EventArgs e) {
-            CelestialObject obj = (CelestialObject)ObjectsView.SelectedItem;
+            object obj = ObjectsView.SelectedItem;
+
             if (obj != null) {
+
+                CelestialObject celObj = (CelestialObject)obj;
+
                 EditObject editObject = new EditObject();
                 editObject.Show();
-                editObject.NameTextBox.Text = obj.Name;
-                editObject.MassTextBox.Text = obj.Mass.ToString();
-                editObject.PositionXTextBox.Text = obj.screenPosition.x.ToString("G4");
-                editObject.PositionYTextBox.Text = obj.screenPosition.y.ToString("G4");
-                editObject.VelocityXTextBox.Text = obj.velocity.x.ToString("G3");
-                editObject.VelocityYTextBox.Text = obj.velocity.y.ToString("G3");
-                editObject.ColourTextBox.Text = obj.visuals.colourName;
+                editObject.NameTextBox.Text = celObj.Name;
+                editObject.MassTextBox.Text = celObj.Mass.ToString();
+                editObject.PositionXTextBox.Text = celObj.screenPosition.x.ToString("G4");
+                editObject.PositionYTextBox.Text = celObj.screenPosition.y.ToString("G4");
+                editObject.VelocityXTextBox.Text = celObj.velocity.x.ToString("G3");
+                editObject.VelocityYTextBox.Text = celObj.velocity.y.ToString("G3");
+                editObject.ColourTextBox.Text = celObj.visuals.colourName;
+
+                if (obj.GetType() == typeof(Star)) {
+                    editObject.ObjectTypeCombo.SelectedIndex = 1;
+                }
+
             }
             else {
                 MessageBox.Show("Please select an object.");
