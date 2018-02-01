@@ -23,6 +23,10 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e) {
+            if (!InputIsValid()) {
+                return;
+            }
+
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
                     CelestialObject obj = (CelestialObject)((MainWindow)window).ObjectsView.SelectedItem;
@@ -53,6 +57,20 @@ namespace ComputingProject_UserInterface {
 
             // Close the window down
             Close();
+        }
+
+        bool InputIsValid() {
+            if (NameTextBox.Text == "") {
+                MessageBox.Show("Name cannot be empty!");
+                return false;
+            }
+            else if (VelocityXTextBox.Text == "") {
+                MessageBox.Show("Velocity X cannot be empty!");
+            }
+            else if (VelocityYTextBox.Text == "") {
+                MessageBox.Show("Velocity Y cannot be empty!");
+            }
+            return false;
         }
     }
 }
