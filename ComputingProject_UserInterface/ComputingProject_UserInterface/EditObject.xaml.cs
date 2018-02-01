@@ -66,10 +66,25 @@ namespace ComputingProject_UserInterface {
             }
             else if (VelocityXTextBox.Text == "") {
                 MessageBox.Show("Velocity X cannot be empty!");
+                return false;
             }
             else if (VelocityYTextBox.Text == "") {
                 MessageBox.Show("Velocity Y cannot be empty!");
+                return false;
             }
+            else if (MassTextBox.Text == "") {
+                MessageBox.Show("Mass cannot be empty");
+                return false;
+            }
+            else if (PositionXTextBox.Text == "") {
+                MessageBox.Show("Position X cannot be empty!");
+                return false;
+            }
+            else if (PositionYTextBox.Text == "") {
+                MessageBox.Show("Position Y cannot be empty!");
+                return false;
+            }
+
             return false;
         }
     }
