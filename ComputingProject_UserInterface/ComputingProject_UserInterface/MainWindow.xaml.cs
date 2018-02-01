@@ -164,6 +164,7 @@ namespace ComputingProject_UserInterface {
                 editObject.PositionYTextBox.Text = obj.screenPosition.y.ToString("G4");
                 editObject.VelocityXTextBox.Text = obj.velocity.x.ToString("G3");
                 editObject.VelocityYTextBox.Text = obj.velocity.y.ToString("G3");
+                editObject.ColourTextBox.Text = obj.visuals.colourName;
             }
             else {
                 MessageBox.Show("Please select an object.");

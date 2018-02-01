@@ -41,7 +41,7 @@ namespace ComputingProject_UserInterface
 
             uint seconds = totalTime;
 
-            Time.Content = "Total Time - D: " + days + " H: " + " M: " + minutes + " S: " + seconds;
+            Time.Content = "Total Time - D: " + days + " H: " + hour + " M: " + minutes + " S: " + seconds;
         }
 
         private void Scale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
