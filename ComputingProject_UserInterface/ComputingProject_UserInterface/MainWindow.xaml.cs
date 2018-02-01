@@ -92,7 +92,6 @@ namespace ComputingProject_UserInterface {
 
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
             Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
-            MessageBox.Show(sun.LifeTime().ToString());
         }
 
         void SetDebugTools() {
@@ -202,6 +201,12 @@ namespace ComputingProject_UserInterface {
         void Advanced_Click(object sender, EventArgs e) {
             Advanced advanced = new Advanced();
             advanced.Show();
+            if (ObjectsView.SelectedItem.GetType() == typeof(Star)) {
+                Star obj = ObjectsView.SelectedItem as Star;
+
+                advanced.SolarMassOfStarTextBox.Text = obj.SolarMassOfStar.ToString();
+                advanced.LuminosityOfStarTextBox.Text = obj.Luminosity.ToString();
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {

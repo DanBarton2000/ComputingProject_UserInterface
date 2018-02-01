@@ -5,11 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ComputingProject_UserInterface"
       mc:Ignorable="d"
-      Title="Advanced" Height="282" Width="250" ResizeMode="NoResize">
+      Title="Advanced" Height="282" Width="280" ResizeMode="NoResize">
 
     <Grid Background="White">
         <Label x:Name="Time" Content="Time: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,32,0,0"/>
         <Label x:Name="Scale" Content="Scale: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,59,0,0"/>
         <Slider x:Name="ScaleSlider" HorizontalAlignment="Left" Margin="48,63,0,0" VerticalAlignment="Top" Width="186" Value="250" Maximum="500" ValueChanged="Scale_ValueChanged"/>
+
+        <Label x:Name="SolarMassOfStar" Content="Solar Mass of Star:" HorizontalAlignment="Left" Margin="6,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
+        <TextBox x:Name="SolarMassOfStarTextBox" IsReadOnly="True" ToolTipService.ShowDuration="1500" HorizontalAlignment="Left" Height="24" Margin="120,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" MaxLength="15"/>
+
+        <Label x:Name="LuminosityOfStar" Content="Luminosity of Star:" HorizontalAlignment="Left" Margin="6,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
+        <TextBox x:Name="LuminosityOfStarTextBox" IsReadOnly="True" ToolTipService.ShowDuration="1500" HorizontalAlignment="Left" Height="22" Margin="120,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" MaxLength="15"/>
     </Grid>
 </Window>
