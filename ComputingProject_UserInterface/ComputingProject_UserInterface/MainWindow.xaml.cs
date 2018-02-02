@@ -17,6 +17,7 @@ using ComputingProject.Collision;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
+using Microsoft.Win32;
 
 namespace ComputingProject_UserInterface {
     /// <summary>
@@ -210,7 +211,10 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {
-            Save.WriteXML("test");
+            //Save.WriteXML("test");
+            OpenFileDialog fileBrowser = new OpenFileDialog();
+            fileBrowser.DefaultExt = ".xml";
+            fileBrowser.ShowDialog();
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
