@@ -214,7 +214,12 @@ namespace ComputingProject_UserInterface {
             //Save.WriteXML("test");
             OpenFileDialog fileBrowser = new OpenFileDialog();
             fileBrowser.DefaultExt = ".xml";
-            fileBrowser.ShowDialog();
+
+            bool? result = fileBrowser.ShowDialog();
+
+            if (result == true) {
+                //fileBrowser.Title;
+            }
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
