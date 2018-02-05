@@ -91,7 +91,8 @@ namespace ComputingProject_UserInterface {
             ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 30);
             ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 80);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30000, 0), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10, 10), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
+            CelestialObject earth1 = new CelestialObject("Earth1", 6E24, new Vector2(0, 0), new Vector2(1 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, earthVis);
             Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
         }
 
@@ -117,7 +118,9 @@ namespace ComputingProject_UserInterface {
         void timer_Tick(object sender, EventArgs e) {
             Simulation.Children.Clear();
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
-                //Console.WriteLine("Screen Position: " + obj.screenPosition.ToString());
+                /*Console.WriteLine("Object: " + obj.Name);
+                Console.WriteLine("Collider position: " + ((CircleCollider)obj.collider).centre.ToString());
+                Console.WriteLine("Object position: " + obj.position.ToString()); */
                 Draw(obj, obj.visuals.size);
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
@@ -202,34 +205,44 @@ namespace ComputingProject_UserInterface {
         void Advanced_Click(object sender, EventArgs e) {
             Advanced advanced = new Advanced();
             advanced.Show();
-            if (ObjectsView.SelectedItem.GetType() == typeof(Star)) {
-                Star obj = ObjectsView.SelectedItem as Star;
+            if (!(ObjectsView.SelectedItem == null)) {
+                if (ObjectsView.SelectedItem.GetType() == typeof(Star)) {
+                    Star obj = ObjectsView.SelectedItem as Star;
 
-                advanced.SolarMassOfStarTextBox.Text = obj.SolarMassOfStar.ToString();
-                advanced.LuminosityOfStarTextBox.Text = obj.Luminosity.ToString();
+                    advanced.SolarMassOfStarTextBox.Text = obj.SolarMassOfStar.ToString();
+                    advanced.LuminosityOfStarTextBox.Text = obj.Luminosity.ToString();
+                }
             }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {
             //Save.WriteXML("test");
-            OpenFileDialog fileBrowser = new OpenFileDialog();
-            fileBrowser.DefaultExt = ".xml";
-
-            bool? result = fileBrowser.ShowDialog();
-
-            if (result == true) {
-                //fileBrowser.Title;
+            SaveFileDialog fileDialogue = new SaveFileDialog();
+            fileDialogue.DefaultExt = ".xml";
+ 
+            if (fileDialogue.ShowDialog() == true) {
+                Save.WriteXML(fileDialogue.FileName);
             }
+            
         }
 
         private void Open_Click(object sender, RoutedEventArgs e) {
-            List<CelestialObject> objects = Load.ReadXML("test");
-            ObjectManager.ClearObjects();
+            OpenFileDialog fileBrowser = new OpenFileDialog();
+            fileBrowser.DefaultExt = ".xml";
 
-            objects.ForEach(x => ObjectManager.AddObject(x));
+            if (fileBrowser.ShowDialog() == true) {
+                List<CelestialObject> xmlObjects = Load.ReadXML(fileBrowser.FileName);
+                if (xmlObjects == null) {
+                    MessageBox.Show("Invalid file.");
+                }
+                else {
+                    ObjectManager.ClearObjects();
+                    xmlObjects.ForEach(x => ObjectManager.AddObject(x as CelestialObject));
 
-            ObjectsView.ItemsSource = null;
-            ObjectsView.ItemsSource = ObjectManager.AllObjects;
+                    ObjectsView.ItemsSource = null;
+                    ObjectsView.ItemsSource = ObjectManager.AllObjects;
+                }
+            }
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e) {
