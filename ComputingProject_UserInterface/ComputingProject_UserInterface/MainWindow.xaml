@@ -28,7 +28,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Canvas Name="Simulation" Background="Black" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Stretch" MaxHeight="699" MaxWidth="1613">
+        <Canvas Name="Simulation" ClipToBounds="True" Background="Black" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Stretch" MaxHeight="699" MaxWidth="1613">
         </Canvas>
         <ListView x:Name="ObjectsView" x:FieldModifier="public" Grid.Column="2" HorizontalAlignment="Left" Height="463" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="275" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
             <ListView.ItemTemplate>

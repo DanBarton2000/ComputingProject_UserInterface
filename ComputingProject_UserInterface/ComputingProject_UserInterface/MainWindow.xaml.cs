@@ -88,18 +88,18 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
-            ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 30);
-            ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 80);
+            ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 10);
+            ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 10);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(10, 10), new Vector2(2 * Constants.AstronomicalUnit, 0 * Constants.AstronomicalUnit), cc, earthVis);
-            CelestialObject earth1 = new CelestialObject("Earth1", 6E24, new Vector2(0, 0), new Vector2(1 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, earthVis);
-            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, Constants.AstronomicalUnit), cc, sunVis);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30 * 1000, 0), new Vector2(Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
+            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(1 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
         }
 
         void SetDebugTools() {
             DebugTools.DebugMode = false;
             DebugTools.UseCollision = true;
             DebugTools.PrintCollisionVelocities = true;
+            DebugTools.PrintForces = true;
         }
 
         void Draw(IQuadtreeObject obj, int size) {
