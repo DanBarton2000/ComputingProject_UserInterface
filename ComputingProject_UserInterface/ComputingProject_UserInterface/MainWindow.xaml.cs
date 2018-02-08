@@ -89,17 +89,21 @@ namespace ComputingProject_UserInterface {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
             ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 10);
+            ObjectVisuals venusVis = new ObjectVisuals(Brushes.Beige, 10);
+            ObjectVisuals mercuryVis = new ObjectVisuals(Brushes.Gray, 10);
             ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 10);
 
-            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30 * 1000, 0), new Vector2(Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
-            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(1 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
+            CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
+            CelestialObject mercury = new CelestialObject("Mercury", 0.3829 * 6E24, new Vector2(45E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.466 * Constants.AstronomicalUnit), cc, mercuryVis);
+            //CelestialObject venus = new CelestialObject("Venus", 6E24 * 0.815, new Vector2(20E+3, 0), new Vector2(1.27200 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, venusVis);
+            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
         }
 
         void SetDebugTools() {
             DebugTools.DebugMode = false;
             DebugTools.UseCollision = true;
-            DebugTools.PrintCollisionVelocities = true;
-            DebugTools.PrintForces = true;
+            DebugTools.PrintCollisionVelocities = false;
+            DebugTools.PrintForces = false;
         }
 
         void Draw(IQuadtreeObject obj, int size) {
