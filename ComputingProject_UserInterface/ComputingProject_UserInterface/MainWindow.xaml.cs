@@ -26,7 +26,7 @@ namespace ComputingProject_UserInterface {
     public partial class MainWindow : Window {
 
         int milliseconds = 1000 / 60;
-        public static double scale = 250 / Constants.AstronomicalUnit;
+        public static double scale = 125 / Constants.AstronomicalUnit;
         public static uint totalTime = 0;
 
         enum TimeSteps {
@@ -91,10 +91,12 @@ namespace ComputingProject_UserInterface {
             ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, 10);
             ObjectVisuals venusVis = new ObjectVisuals(Brushes.Beige, 10);
             ObjectVisuals mercuryVis = new ObjectVisuals(Brushes.Gray, 10);
+            ObjectVisuals saturnVis = new ObjectVisuals(Brushes.Yellow, 10);
             ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 10);
 
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
             CelestialObject mercury = new CelestialObject("Mercury", 0.3829 * 6E24, new Vector2(45E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.466 * Constants.AstronomicalUnit), cc, mercuryVis);
+            CelestialObject saturn = new CelestialObject("Saturn", 8.55 * 6E24, new Vector2(9.68E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 12 * Constants.AstronomicalUnit), cc, saturnVis);
             //CelestialObject venus = new CelestialObject("Venus", 6E24 * 0.815, new Vector2(20E+3, 0), new Vector2(1.27200 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, venusVis);
             Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
         }
@@ -113,8 +115,8 @@ namespace ComputingProject_UserInterface {
             circle.Width = obj.visuals.size;
 
             if (obj.screenPosition.x + obj.visuals.size < centre.x && obj.screenPosition.y + obj.visuals.size < centre.y) {
-                Canvas.SetTop(circle, obj.screenPosition.y + (size / 2));
-                Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2));
+                Canvas.SetTop(circle, obj.screenPosition.y + (size / 2) + 200);
+                Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2) + 250);
                 Simulation.Children.Add(circle);
             }
         }

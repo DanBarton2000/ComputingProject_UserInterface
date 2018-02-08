@@ -23,6 +23,7 @@ namespace ComputingProject_UserInterface
         public Advanced()
         {
             InitializeComponent();
+            ScaleSlider.Value = MainWindow.scale * Constants.AstronomicalUnit;
         }
 
         public void CalculateTime() {
