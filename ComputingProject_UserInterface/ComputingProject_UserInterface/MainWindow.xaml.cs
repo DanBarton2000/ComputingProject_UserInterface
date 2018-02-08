@@ -100,7 +100,7 @@ namespace ComputingProject_UserInterface {
             ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 9);
 
             // Create the objects needed for the solar system
-            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
+            Star sun = new Star("Sun", 1.989E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
             CelestialObject mercury = new CelestialObject("Mercury", 0.3829 * 6E24, new Vector2(45E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.466 * Constants.AstronomicalUnit), cc, mercuryVis);
             CelestialObject venus = new CelestialObject("Venus", 6E24 * 0.815, new Vector2(35E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.72 * Constants.AstronomicalUnit), cc, venusVis);
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
@@ -126,7 +126,7 @@ namespace ComputingProject_UserInterface {
 
             if (obj.screenPosition.x + obj.visuals.size < centre.x && obj.screenPosition.y + obj.visuals.size < centre.y) {
                 Canvas.SetTop(circle, obj.screenPosition.y + (size / 2) + 200);
-                Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2) + 250);
+                Canvas.SetLeft(circle, obj.screenPosition.x + (size / 2) + 150);
                 Simulation.Children.Add(circle);
             }
         }

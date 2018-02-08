@@ -34,7 +34,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        
                         <TextBlock Text="{Binding Name}"/>
                     </WrapPanel>
                 </DataTemplate>
@@ -50,8 +49,8 @@
                     <WrapPanel Focusable="False">
                         <TextBlock Text="Name: "/>
                         <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text=" Screen Position: "/>
-                        <TextBlock Text="{Binding screenPosition}"/>
+                        <TextBlock Text=" Position: "/>
+                        <TextBlock Text="{Binding position}"/>
                         <TextBlock Text=" Velocity: "/>
                         <TextBlock Text="{Binding velocity}"/>
                     </WrapPanel>
