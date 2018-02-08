@@ -26,6 +26,9 @@
                     <Separator />
                     <MenuItem Header="Exit" />
                 </MenuItem>
+                <MenuItem x:Name="PresetDropDown" Header="Preset">
+                    <MenuItem Header="Solar System"/>
+                </MenuItem>
             </Menu>
         </DockPanel>
         <Canvas Name="Simulation" ClipToBounds="True" Background="Black" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Stretch" MaxHeight="699" MaxWidth="1613">
