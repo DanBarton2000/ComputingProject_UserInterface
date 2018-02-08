@@ -88,23 +88,27 @@ namespace ComputingProject_UserInterface {
         void AddObjects() {
             CircleCollider cc = new CircleCollider(new Vector2(), objectSize);
 
+            // Set the visuals for each object up
             ObjectVisuals earthVis = new ObjectVisuals(Brushes.Blue, objectSize);
             ObjectVisuals venusVis = new ObjectVisuals(Brushes.Beige, objectSize);
             ObjectVisuals mercuryVis = new ObjectVisuals(Brushes.Gray, objectSize);
             ObjectVisuals marsVis = new ObjectVisuals(Brushes.Red, objectSize);
             ObjectVisuals saturnVis = new ObjectVisuals(Brushes.Yellow, objectSize);
-            ObjectVisuals jupiterVis = new ObjectVisuals(Brushes.Yellow, objectSize);
+            ObjectVisuals jupiterVis = new ObjectVisuals(Brushes.LightGray, objectSize);
             ObjectVisuals uranusVis = new ObjectVisuals(Brushes.LightBlue, objectSize);
-            ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, objectSize);
+            ObjectVisuals neptuneVis = new ObjectVisuals(Brushes.DarkBlue, objectSize);
+            ObjectVisuals sunVis = new ObjectVisuals(Brushes.Yellow, 9);
 
+            // Create the objects needed for the solar system
+            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
+            CelestialObject mercury = new CelestialObject("Mercury", 0.3829 * 6E24, new Vector2(45E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.466 * Constants.AstronomicalUnit), cc, mercuryVis);
+            CelestialObject venus = new CelestialObject("Venus", 6E24 * 0.815, new Vector2(35E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.72 * Constants.AstronomicalUnit), cc, venusVis);
             CelestialObject earth = new CelestialObject("Earth", 6E24, new Vector2(30E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, earthVis);
             CelestialObject mars = new CelestialObject("Mars", 0.107 * 6E24, new Vector2(24E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 2.666 * Constants.AstronomicalUnit), cc, marsVis);
-            CelestialObject mercury = new CelestialObject("Mercury", 0.3829 * 6E24, new Vector2(45E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 1.466 * Constants.AstronomicalUnit), cc, mercuryVis);
-            CelestialObject saturn = new CelestialObject("Saturn", 8.55 * 6E24, new Vector2(9.68E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 11 * Constants.AstronomicalUnit), cc, saturnVis);
             CelestialObject jupiter = new CelestialObject("Jupiter", 317.8 * 6E24, new Vector2(13E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 7 * Constants.AstronomicalUnit), cc, jupiterVis);
-            CelestialObject urnanus = new CelestialObject("Uranus", 14.5 * 6E24, new Vector2(0, 6.8E+3), new Vector2(21 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, uranusVis);
-            //CelestialObject venus = new CelestialObject("Venus", 6E24 * 0.815, new Vector2(20E+3, 0), new Vector2(1.27200 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, venusVis);
-            Star sun = new Star("Sun", 2E+30, new Vector2(0, 0), new Vector2(2 * Constants.AstronomicalUnit, 1 * Constants.AstronomicalUnit), cc, sunVis);
+            CelestialObject saturn = new CelestialObject("Saturn", 8.55 * 6E24, new Vector2(9.68E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 11 * Constants.AstronomicalUnit), cc, saturnVis);
+            CelestialObject urnanus = new CelestialObject("Uranus", 14.5 * 6E24, new Vector2(0, -6.8E+3), new Vector2(21 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, uranusVis);
+            CelestialObject neptune = new CelestialObject("Neptune", 17.147 * 6E24, new Vector2(5.43, 0), new Vector2(0 * Constants.AstronomicalUnit, 32 * Constants.AstronomicalUnit), cc, neptuneVis);
         }
 
         void SetDebugTools() {
