@@ -17,6 +17,9 @@ using ComputingProject.Collision;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
+using System.IO;
+using System.Reflection;
+using System.Resources;
 using Microsoft.Win32;
 
 namespace ComputingProject_UserInterface {
@@ -247,7 +250,7 @@ namespace ComputingProject_UserInterface {
             fileBrowser.DefaultExt = ".xml";
 
             if (fileBrowser.ShowDialog() == true) {
-                List<CelestialObject> xmlObjects = Load.ReadXML(fileBrowser.FileName);
+                List<CelestialObject> xmlObjects = Load.ReadXMLFromPath(fileBrowser.FileName);
                 if (xmlObjects == null) {
                     MessageBox.Show("Invalid file.");
                 }
@@ -257,6 +260,9 @@ namespace ComputingProject_UserInterface {
 
                     ObjectsView.ItemsSource = null;
                     ObjectsView.ItemsSource = ObjectManager.AllObjects;
+
+                    ObjectsViewVelocityPosition.ItemsSource = null;
+                    ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
                 }
             }
         }
@@ -268,6 +274,27 @@ namespace ComputingProject_UserInterface {
         private void Play_Click(object sender, RoutedEventArgs e) {
             timeController.UnPause();
             timeController.DefaultSpeed();
+        }
+
+        private void SolarSystem_Click(object sender, RoutedEventArgs e) {
+            string filePath = ComputingProject_UserInterface.Resources.Preset.SolarSystem;
+
+            List<CelestialObject> xmlObjects = new List<CelestialObject>();
+            xmlObjects = Load.ReadXML(filePath);
+
+            if (xmlObjects == null) {
+                MessageBox.Show("Invalid file.");
+            }
+            else {
+                ObjectManager.ClearObjects();
+                xmlObjects.ForEach(x => ObjectManager.AddObject(x as CelestialObject));
+
+                ObjectsView.ItemsSource = null;
+                ObjectsView.ItemsSource = ObjectManager.AllObjects;
+
+                ObjectsViewVelocityPosition.ItemsSource = null;
+                ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
+            }
         }
     }
 }

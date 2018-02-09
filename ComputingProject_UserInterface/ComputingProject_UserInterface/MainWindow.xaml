@@ -27,7 +27,7 @@
                     <MenuItem Header="Exit" />
                 </MenuItem>
                 <MenuItem x:Name="PresetDropDown" Header="Preset">
-                    <MenuItem Header="Solar System"/>
+                    <MenuItem Header="Solar System" Click="SolarSystem_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
