@@ -50,7 +50,7 @@ namespace ComputingProject_UserInterface {
 
         Vector2 centre;
 
-        public int objectSize = 5;
+        public static int objectSize = 5;
 
         public MainWindow() {
             InitializeComponent();
@@ -110,7 +110,7 @@ namespace ComputingProject_UserInterface {
             CelestialObject jupiter = new CelestialObject("Jupiter", 317.8 * 6E24, new Vector2(13E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 7 * Constants.AstronomicalUnit), cc, jupiterVis);
             CelestialObject saturn = new CelestialObject("Saturn", 8.55 * 6E24, new Vector2(9.68E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 11 * Constants.AstronomicalUnit), cc, saturnVis);
             CelestialObject urnanus = new CelestialObject("Uranus", 14.5 * 6E24, new Vector2(0, -6.8E+3), new Vector2(21 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, uranusVis);
-            CelestialObject neptune = new CelestialObject("Neptune", 17.147 * 6E24, new Vector2(5.43, 0), new Vector2(0 * Constants.AstronomicalUnit, 32 * Constants.AstronomicalUnit), cc, neptuneVis);
+            CelestialObject neptune = new CelestialObject("Neptune", 17.147 * 6E24, new Vector2(0, 5.43E+3), new Vector2(32 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, neptuneVis);
         }
 
         void SetDebugTools() {
@@ -234,7 +234,6 @@ namespace ComputingProject_UserInterface {
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {
-            //Save.WriteXML("test");
             SaveFileDialog fileDialogue = new SaveFileDialog();
             fileDialogue.DefaultExt = ".xml";
  
@@ -279,7 +278,7 @@ namespace ComputingProject_UserInterface {
             xmlObjects = Load.ReadXML(filePath);
 
             if (xmlObjects == null) {
-                MessageBox.Show("Invalid file.");
+                MessageBox.Show("Invalid file or file is empty.");
             }
             else {
                 ObjectManager.ClearObjects();

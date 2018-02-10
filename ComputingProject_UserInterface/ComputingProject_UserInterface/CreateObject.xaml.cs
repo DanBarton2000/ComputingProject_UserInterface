@@ -31,7 +31,57 @@ namespace ComputingProject_UserInterface {
             }
 
             string name = NameTextBox.Text;
-            double mass = double.Parse(MassTextBox.Text);
+            double mass;
+
+            double positionX;
+            double positionY;
+
+            double velocityX;
+            double velocityY;
+
+            #region Validation
+            try {
+                mass = double.Parse(MassTextBox.Text);
+
+            }
+            catch {
+                MessageBox.Show("Mass is invalid.");
+                return;
+            }
+
+            try {
+                positionX = double.Parse(PositionXTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Position X is invalid.");
+                return;
+            }
+
+            try {
+                positionY = double.Parse(PositionYTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Position Y is invalid.");
+                return;
+            }
+
+            try {
+                velocityX = double.Parse(VelocityXTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Velocity X is invalid.");
+                return;
+            }
+
+            try {
+                velocityY = double.Parse(VelocityYTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Velocity Y is invalid.");
+                return;
+            }
+            #endregion
+
             string hex = ColourTextBox.Text.ToUpper();
             // Screen position
             Vector2 position = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
@@ -39,8 +89,7 @@ namespace ComputingProject_UserInterface {
 
             string objectTypeString = ObjectTypeCombo.Text;
 
-            // Hard coded size
-            int size = 5;
+            int size = MainWindow.objectSize;
 
             SolidColorBrush colour;
 

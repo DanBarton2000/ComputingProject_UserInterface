@@ -34,11 +34,59 @@ namespace ComputingProject_UserInterface {
                     foreach (IQuadtreeObject quadObject in ObjectManager.AllObjects) {
                         if (quadObject == obj) {
                             quadObject.Name = NameTextBox.Text;
-                            Vector2 velocity = new Vector2(double.Parse(VelocityXTextBox.Text), double.Parse(VelocityYTextBox.Text));
-                            quadObject.velocity = velocity;
-                            Vector2 screenPosition = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
+
+                            double velocityX;
+                            double velocityY;
+
+                            double positionX;
+                            double positionY;
+
+                            #region Validation
+                            try {
+                                velocityX = double.Parse(VelocityXTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Velocity X is invalid.");
+                                return;
+                            }
+
+                            try {
+                                velocityY = double.Parse(VelocityYTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Velocity Y is invalid.");
+                                return;
+                            }
+
+                            try {
+                                positionX = double.Parse(PositionXTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Position X is invalid.");
+                                return;
+                            }
+
+                            try {
+                                positionY = double.Parse(PositionYTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Position Y is invalid.");
+                                return;
+                            }
+
+                            try {
+                                quadObject.Mass = double.Parse(MassTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Mass is invalid.");
+                                return;
+                            }
+                            #endregion
+
+                            quadObject.velocity = new Vector2(velocityX, velocityY);
+
+                            Vector2 screenPosition = new Vector2(positionX, positionY);
                             quadObject.position = screenPosition / MainWindow.scale;
-                            quadObject.Mass = double.Parse(MassTextBox.Text);
 
                             try {
                                 obj.visuals.colour = (SolidColorBrush)new BrushConverter().ConvertFromString(ColourTextBox.Text.ToUpper());
