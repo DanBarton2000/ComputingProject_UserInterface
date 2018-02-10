@@ -31,6 +31,9 @@ namespace ComputingProject_UserInterface {
         public static double scale = 30 / Constants.AstronomicalUnit;
         public static uint totalTime = 0;
 
+        public static double MaxPositionX { get; private set; } = 100;
+        public static double MaxPositionY { get; private set; } = 100;
+
         enum TimeSteps {
             Second = 1,
             Minute = 60,
@@ -186,8 +189,8 @@ namespace ComputingProject_UserInterface {
                 editObject.Show();
                 editObject.NameTextBox.Text = celObj.Name;
                 editObject.MassTextBox.Text = celObj.Mass.ToString();
-                editObject.PositionXTextBox.Text = celObj.screenPosition.x.ToString("G4");
-                editObject.PositionYTextBox.Text = celObj.screenPosition.y.ToString("G4");
+                editObject.PositionXTextBox.Text = (celObj.screenPosition.x / Constants.AstronomicalUnit).ToString("G4");
+                editObject.PositionYTextBox.Text = (celObj.screenPosition.y / Constants.AstronomicalUnit).ToString("G4");
                 editObject.VelocityXTextBox.Text = celObj.velocity.x.ToString("G3");
                 editObject.VelocityYTextBox.Text = celObj.velocity.y.ToString("G3");
                 editObject.ColourTextBox.Text = celObj.visuals.colourName;

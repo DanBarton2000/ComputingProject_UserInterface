@@ -84,7 +84,7 @@ namespace ComputingProject_UserInterface {
 
             string hex = ColourTextBox.Text.ToUpper();
             // Screen position
-            Vector2 position = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
+            Vector2 position = new Vector2(positionX * Constants.AstronomicalUnit, positionY * Constants.AstronomicalUnit);
             Vector2 velocity = new Vector2(double.Parse(VelocityXTextBox.Text), double.Parse(VelocityYTextBox.Text));
 
             string objectTypeString = ObjectTypeCombo.Text;
@@ -105,9 +105,6 @@ namespace ComputingProject_UserInterface {
             if (!IsValidInput(name, mass, position, velocity)) {
                 return;
             }
-
-            // Turn the screen position into world coordinates
-            position /= MainWindow.scale;
 
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
                 if (obj.position == position) {

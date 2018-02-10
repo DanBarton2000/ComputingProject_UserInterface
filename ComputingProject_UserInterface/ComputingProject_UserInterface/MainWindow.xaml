@@ -17,8 +17,8 @@
             <ColumnDefinition Width="1613*" />
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <DockPanel Margin="0,0,0,27">
+            <Menu DockPanel.Dock="Top" Height="32" RenderTransformOrigin="0.557,0.875">
                 <MenuItem x:Name="FileDropDown" Header="File">
                     <MenuItem Header="Save" Click="Save_Click"/>
                     <MenuItem Header="Open" Click="Open_Click"/>

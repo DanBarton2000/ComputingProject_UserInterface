@@ -84,9 +84,19 @@ namespace ComputingProject_UserInterface {
                             #endregion
 
                             quadObject.velocity = new Vector2(velocityX, velocityY);
+                            
+                            if (positionX > MainWindow.MaxPositionX) {
+                                MessageBox.Show("Position X too big (Position is measured in AU).");
+                                return;
+                            }
 
-                            Vector2 screenPosition = new Vector2(positionX, positionY);
-                            quadObject.position = screenPosition / MainWindow.scale;
+                            if (positionY > MainWindow.MaxPositionY) {
+                                MessageBox.Show("Position Y too big (Position is measured in AU).");
+                                return;
+                            }
+
+                            quadObject.position = new Vector2(positionX * Constants.AstronomicalUnit, positionY * Constants.AstronomicalUnit);
+
 
                             try {
                                 obj.visuals.colour = (SolidColorBrush)new BrushConverter().ConvertFromString(ColourTextBox.Text.ToUpper());
