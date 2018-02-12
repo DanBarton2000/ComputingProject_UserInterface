@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputingProject_UserInterf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputingProject", "C:\Users\Dan\Documents\Visual Studio 2015\Projects\ComputingProject\ComputingProject\ComputingProject.csproj", "{445CC1A9-2F39-4B84-B886-C3264E428F6A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ComputingProjectInstaller", "..\ComputingProjectInstaller\ComputingProjectInstaller.vdproj", "{900457B5-1564-4E36-B64F-DFEC40285D29}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +21,6 @@ Global
 		{445CC1A9-2F39-4B84-B886-C3264E428F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{445CC1A9-2F39-4B84-B886-C3264E428F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{445CC1A9-2F39-4B84-B886-C3264E428F6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{900457B5-1564-4E36-B64F-DFEC40285D29}.Debug|Any CPU.ActiveCfg = Debug
-		{900457B5-1564-4E36-B64F-DFEC40285D29}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

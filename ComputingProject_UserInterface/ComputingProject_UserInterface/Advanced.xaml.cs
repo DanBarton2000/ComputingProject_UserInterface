@@ -20,12 +20,14 @@ namespace ComputingProject_UserInterface
     /// </summary>
     public partial class Advanced : Window
     {
-        public Advanced()
-        {
+        public Advanced() {
             InitializeComponent();
             ScaleSlider.Value = MainWindow.scale * Constants.AstronomicalUnit;
         }
 
+        /// <summary>
+        /// Calculates the time and updates the label
+        /// </summary>
         public void CalculateTime() {
             uint totalTime = MainWindow.totalTime;
             uint days = totalTime / (24 * 3600);
@@ -45,6 +47,11 @@ namespace ComputingProject_UserInterface
             Time.Content = "Total Time - D: " + days + " H: " + hour + " M: " + minutes + " S: " + seconds;
         }
 
+        /// <summary>
+        /// Method that is called when the slider is updates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Scale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             MainWindow.scale = ScaleSlider.Value / Constants.AstronomicalUnit;
         }

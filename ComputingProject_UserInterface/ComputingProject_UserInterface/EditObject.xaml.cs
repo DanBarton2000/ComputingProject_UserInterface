@@ -22,14 +22,25 @@ namespace ComputingProject_UserInterface {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This method is called when the confirm button is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Confirm_Click(object sender, RoutedEventArgs e) {
             if (!InputIsValid()) {
                 return;
             }
 
             foreach (Window window in Application.Current.Windows) {
+                // Gets the object selected in the main window and updates the simulation
                 if (window.GetType() == typeof(MainWindow)) {
                     CelestialObject obj = (CelestialObject)((MainWindow)window).ObjectsView.SelectedItem;
+
+                    if (obj == null) {
+                        MessageBox.Show("No object selected.");
+                        return;
+                    }
 
                     foreach (IQuadtreeObject quadObject in ObjectManager.AllObjects) {
                         if (quadObject == obj) {
@@ -117,6 +128,10 @@ namespace ComputingProject_UserInterface {
             Close();
         }
 
+        /// <summary>
+        /// Helper method to make sure that none of the inputs are empty
+        /// </summary>
+        /// <returns></returns>
         bool InputIsValid() {
             if (NameTextBox.Text == "") {
                 MessageBox.Show("Name cannot be empty!");
