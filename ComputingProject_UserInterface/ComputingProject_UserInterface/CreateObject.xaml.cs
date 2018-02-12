@@ -24,6 +24,11 @@ namespace ComputingProject_UserInterface {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Method that is called when the create object button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateObjectButton_Click(object sender, RoutedEventArgs e) {
             if (TestInputForEmpty()) {
                 MessageBox.Show("Text boxes cannot be empty!");
@@ -31,16 +36,65 @@ namespace ComputingProject_UserInterface {
             }
 
             string name = NameTextBox.Text;
-            double mass = double.Parse(MassTextBox.Text);
+            double mass;
+
+            double positionX;
+            double positionY;
+
+            double velocityX;
+            double velocityY;
+
+            #region Validation
+            try {
+                mass = double.Parse(MassTextBox.Text);
+
+            }
+            catch {
+                MessageBox.Show("Mass is invalid.");
+                return;
+            }
+
+            try {
+                positionX = double.Parse(PositionXTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Position X is invalid.");
+                return;
+            }
+
+            try {
+                positionY = double.Parse(PositionYTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Position Y is invalid.");
+                return;
+            }
+
+            try {
+                velocityX = double.Parse(VelocityXTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Velocity X is invalid.");
+                return;
+            }
+
+            try {
+                velocityY = double.Parse(VelocityYTextBox.Text);
+            }
+            catch {
+                MessageBox.Show("Velocity Y is invalid.");
+                return;
+            }
+            #endregion
+
             string hex = ColourTextBox.Text.ToUpper();
             // Screen position
-            Vector2 position = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
-            Vector2 velocity = new Vector2(double.Parse(VelocityXTextBox.Text), double.Parse(VelocityYTextBox.Text));
+            Vector2 position = new Vector2(positionX * Constants.AstronomicalUnit, positionY * Constants.AstronomicalUnit);
+            Vector2 velocity = new Vector2(velocityX, velocityY);
 
             string objectTypeString = ObjectTypeCombo.Text;
 
-            // Hard coded size
-            int size = 5;
+            int size = MainWindow.objectSize;
 
             SolidColorBrush colour;
 
@@ -56,9 +110,6 @@ namespace ComputingProject_UserInterface {
             if (!IsValidInput(name, mass, position, velocity)) {
                 return;
             }
-
-            // Turn the screen position into world coordinates
-            position /= MainWindow.scale;
 
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
                 if (obj.position == position) {
@@ -92,6 +143,10 @@ namespace ComputingProject_UserInterface {
             Close();
         }
 
+        /// <summary>
+        /// Method that checks to see if any of the inputs are empty
+        /// </summary>
+        /// <returns></returns>
         bool TestInputForEmpty() {
             if (NameTextBox.Text == "" || MassTextBox.Text == "" || PositionXTextBox.Text == "" || PositionYTextBox.Text == ""
                 || VelocityXTextBox.Text == "" || VelocityYTextBox.Text == "" || ColourTextBox.Text == "") {
@@ -101,6 +156,14 @@ namespace ComputingProject_UserInterface {
             return false;
         }
 
+        /// <summary>
+        /// Method that checks to see if the input is valid
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="mass"></param>
+        /// <param name="position"></param>
+        /// <param name="velocity"></param>
+        /// <returns></returns>
         bool IsValidInput(string name, double mass, Vector2 position, Vector2 velocity) {
             if (mass < 1) {
                 MessageBox.Show("Mass is too low!");

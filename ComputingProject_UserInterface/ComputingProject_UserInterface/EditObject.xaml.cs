@@ -22,23 +22,92 @@ namespace ComputingProject_UserInterface {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This method is called when the confirm button is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Confirm_Click(object sender, RoutedEventArgs e) {
             if (!InputIsValid()) {
                 return;
             }
 
             foreach (Window window in Application.Current.Windows) {
+                // Gets the object selected in the main window and updates the simulation
                 if (window.GetType() == typeof(MainWindow)) {
                     CelestialObject obj = (CelestialObject)((MainWindow)window).ObjectsView.SelectedItem;
+
+                    if (obj == null) {
+                        MessageBox.Show("No object selected.");
+                        return;
+                    }
 
                     foreach (IQuadtreeObject quadObject in ObjectManager.AllObjects) {
                         if (quadObject == obj) {
                             quadObject.Name = NameTextBox.Text;
-                            Vector2 velocity = new Vector2(double.Parse(VelocityXTextBox.Text), double.Parse(VelocityYTextBox.Text));
-                            quadObject.velocity = velocity;
-                            Vector2 screenPosition = new Vector2(double.Parse(PositionXTextBox.Text), double.Parse(PositionYTextBox.Text));
-                            quadObject.position = screenPosition / MainWindow.scale;
-                            quadObject.Mass = double.Parse(MassTextBox.Text);
+
+                            double velocityX;
+                            double velocityY;
+
+                            double positionX;
+                            double positionY;
+
+                            #region Validation
+                            try {
+                                velocityX = double.Parse(VelocityXTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Velocity X is invalid.");
+                                return;
+                            }
+
+                            try {
+                                velocityY = double.Parse(VelocityYTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Velocity Y is invalid.");
+                                return;
+                            }
+
+                            try {
+                                positionX = double.Parse(PositionXTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Position X is invalid.");
+                                return;
+                            }
+
+                            try {
+                                positionY = double.Parse(PositionYTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Position Y is invalid.");
+                                return;
+                            }
+
+                            try {
+                                quadObject.Mass = double.Parse(MassTextBox.Text);
+                            }
+                            catch {
+                                MessageBox.Show("Mass is invalid.");
+                                return;
+                            }
+                            #endregion
+
+                            quadObject.velocity = new Vector2(velocityX, velocityY);
+                            
+                            if (positionX > MainWindow.MaxPositionX) {
+                                MessageBox.Show("Position X too big (Position is measured in AU).");
+                                return;
+                            }
+
+                            if (positionY > MainWindow.MaxPositionY) {
+                                MessageBox.Show("Position Y too big (Position is measured in AU).");
+                                return;
+                            }
+
+                            quadObject.position = new Vector2(positionX * Constants.AstronomicalUnit, positionY * Constants.AstronomicalUnit);
+
 
                             try {
                                 obj.visuals.colour = (SolidColorBrush)new BrushConverter().ConvertFromString(ColourTextBox.Text.ToUpper());
@@ -59,6 +128,10 @@ namespace ComputingProject_UserInterface {
             Close();
         }
 
+        /// <summary>
+        /// Helper method to make sure that none of the inputs are empty
+        /// </summary>
+        /// <returns></returns>
         bool InputIsValid() {
             if (NameTextBox.Text == "") {
                 MessageBox.Show("Name cannot be empty!");

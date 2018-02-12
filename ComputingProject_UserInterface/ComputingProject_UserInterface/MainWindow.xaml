@@ -17,8 +17,8 @@
             <ColumnDefinition Width="1613*" />
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <DockPanel Margin="0,0,0,27">
+            <Menu DockPanel.Dock="Top" Height="32" RenderTransformOrigin="0.557,0.875">
                 <MenuItem x:Name="FileDropDown" Header="File">
                     <MenuItem Header="Save" Click="Save_Click"/>
                     <MenuItem Header="Open" Click="Open_Click"/>
@@ -46,7 +46,7 @@
         <Button x:Name="EditObject" Content="Edit Object" Grid.Column="2" Margin="60,0,60,114" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="EditObject_Click"/>
         <Button x:Name="DeleteObject" Content="Delete Object" Grid.Column="2" Margin="60,0,60,66" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="DeleteObject_Click"/>
         <Button x:Name="Advanced" Content="Advanced" Grid.Column="2" Margin="60,0,60,18" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="43" Click="Advanced_Click"/>
-        <ListView x:Name="ObjectsViewVelocityPosition" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="1585" Grid.Column="1" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Focusable="False">
+        <ListView x:Name="ObjectsViewVelocityPosition" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="1546" Grid.Column="1" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Focusable="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Focusable="False">

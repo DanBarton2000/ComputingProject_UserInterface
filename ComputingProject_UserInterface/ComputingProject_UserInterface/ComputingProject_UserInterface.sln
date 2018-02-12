@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputingProject_UserInterface", "ComputingProject_UserInterface.csproj", "{4C31D02D-3755-46EA-B5DE-6AC1D119D41E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputingProject", "..\..\..\Computing Project Library\ComputingProject\ComputingProject.csproj", "{445CC1A9-2F39-4B84-B886-C3264E428F6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputingProject", "C:\Users\Dan\Documents\Visual Studio 2015\Projects\ComputingProject\ComputingProject\ComputingProject.csproj", "{445CC1A9-2F39-4B84-B886-C3264E428F6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -17,9 +17,8 @@ using ComputingProject.Collision;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
-using System.IO;
-using System.Reflection;
 using System.Resources;
+using System.Reflection;
 using Microsoft.Win32;
 
 namespace ComputingProject_UserInterface {
@@ -31,6 +30,9 @@ namespace ComputingProject_UserInterface {
         int milliseconds = 1000 / 60;
         public static double scale = 30 / Constants.AstronomicalUnit;
         public static uint totalTime = 0;
+
+        public static double MaxPositionX { get; private set; } = 100;
+        public static double MaxPositionY { get; private set; } = 100;
 
         enum TimeSteps {
             Second = 1,
@@ -51,7 +53,7 @@ namespace ComputingProject_UserInterface {
 
         Vector2 centre;
 
-        public int objectSize = 5;
+        public static int objectSize = 5;
 
         public MainWindow() {
             InitializeComponent();
@@ -111,9 +113,12 @@ namespace ComputingProject_UserInterface {
             CelestialObject jupiter = new CelestialObject("Jupiter", 317.8 * 6E24, new Vector2(13E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 7 * Constants.AstronomicalUnit), cc, jupiterVis);
             CelestialObject saturn = new CelestialObject("Saturn", 8.55 * 6E24, new Vector2(9.68E+3, 0), new Vector2(2 * Constants.AstronomicalUnit, 11 * Constants.AstronomicalUnit), cc, saturnVis);
             CelestialObject urnanus = new CelestialObject("Uranus", 14.5 * 6E24, new Vector2(0, -6.8E+3), new Vector2(21 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, uranusVis);
-            CelestialObject neptune = new CelestialObject("Neptune", 17.147 * 6E24, new Vector2(5.43, 0), new Vector2(0 * Constants.AstronomicalUnit, 32 * Constants.AstronomicalUnit), cc, neptuneVis);
+            CelestialObject neptune = new CelestialObject("Neptune", 17.147 * 6E24, new Vector2(0, 5.43E+3), new Vector2(32 * Constants.AstronomicalUnit, 2 * Constants.AstronomicalUnit), cc, neptuneVis);
         }
 
+        /// <summary>
+        /// Sets up the debugging properties
+        /// </summary>
         void SetDebugTools() {
             DebugTools.DebugMode = false;
             DebugTools.UseCollision = true;
@@ -121,6 +126,11 @@ namespace ComputingProject_UserInterface {
             DebugTools.PrintForces = false;
         }
 
+        /// <summary>
+        /// Draws an object on screen
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="size"></param>
         void Draw(IQuadtreeObject obj, int size) {
             Ellipse circle = new Ellipse();
             circle.Fill = obj.visuals.colour;
@@ -134,6 +144,11 @@ namespace ComputingProject_UserInterface {
             }
         }
 
+        /// <summary>
+        /// Updates all graphics 60 times per second
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void timer_Tick(object sender, EventArgs e) {
             Simulation.Children.Clear();
             foreach (IQuadtreeObject obj in ObjectManager.AllObjects) {
@@ -142,7 +157,7 @@ namespace ComputingProject_UserInterface {
                 Console.WriteLine("Object position: " + obj.position.ToString()); */
                 Draw(obj, obj.visuals.size);
                 ObjectsViewVelocityPosition.ItemsSource = null;
-                ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
+                ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;   
 
                 totalTime += (uint)Math.Abs(timeController.currentTimeStep);
 
@@ -156,6 +171,11 @@ namespace ComputingProject_UserInterface {
             }
         }
 
+        /// <summary>
+        /// Updates all forces and velocities on another thread
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Worker_DoWork(object sender, EventArgs e) {
             while (!worker.CancellationPending) {
                 Stopwatch sw = new Stopwatch();
@@ -171,11 +191,22 @@ namespace ComputingProject_UserInterface {
             }
         }
 
+        /// <summary>
+        /// Brings up the create object window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CreateObject_Click(object sender, EventArgs e) {
             CreateObject createObject = new CreateObject();
             createObject.Show();
         }
 
+        /// <summary>
+        /// Brings up the edit object screen
+        /// Fills in the necessary information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void EditObject_Click(object sender, EventArgs e) {
             object obj = ObjectsView.SelectedItem;
 
@@ -187,8 +218,8 @@ namespace ComputingProject_UserInterface {
                 editObject.Show();
                 editObject.NameTextBox.Text = celObj.Name;
                 editObject.MassTextBox.Text = celObj.Mass.ToString();
-                editObject.PositionXTextBox.Text = celObj.screenPosition.x.ToString("G4");
-                editObject.PositionYTextBox.Text = celObj.screenPosition.y.ToString("G4");
+                editObject.PositionXTextBox.Text = (celObj.position.x / Constants.AstronomicalUnit).ToString("G4");
+                editObject.PositionYTextBox.Text = (celObj.position.y / Constants.AstronomicalUnit).ToString("G4");
                 editObject.VelocityXTextBox.Text = celObj.velocity.x.ToString("G3");
                 editObject.VelocityYTextBox.Text = celObj.velocity.y.ToString("G3");
                 editObject.ColourTextBox.Text = celObj.visuals.colourName;
@@ -203,9 +234,15 @@ namespace ComputingProject_UserInterface {
             }
         }
 
+        /// <summary>
+        /// Deletes the selected object from the simulation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void DeleteObject_Click(object sender, EventArgs e) {
             CelestialObject co = (CelestialObject)ObjectsView.SelectedItem;
             if (co == null) {
+                MessageBox.Show("Please select an object.");
                 return;
             }
             ObjectManager.AllObjects.Remove(co);
@@ -221,21 +258,33 @@ namespace ComputingProject_UserInterface {
             ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
         }
 
+        /// <summary>
+        /// Brings up the advanced window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Advanced_Click(object sender, EventArgs e) {
             Advanced advanced = new Advanced();
             advanced.Show();
             if (!(ObjectsView.SelectedItem == null)) {
                 if (ObjectsView.SelectedItem.GetType() == typeof(Star)) {
                     Star obj = ObjectsView.SelectedItem as Star;
+                    double[] zones = obj.HabitableZone();
 
                     advanced.SolarMassOfStarTextBox.Text = obj.SolarMassOfStar.ToString();
                     advanced.LuminosityOfStarTextBox.Text = obj.Luminosity.ToString();
+                    advanced.HabitableZoneInnerTextBox.Text = (zones[1]).ToString();
+                    advanced.HabitableZoneOuterTextBox.Text = (zones[0]).ToString();
                 }
             }
         }
 
+        /// <summary>
+        /// Brings up the save file dialogue 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Save_Click(object sender, RoutedEventArgs e) {
-            //Save.WriteXML("test");
             SaveFileDialog fileDialogue = new SaveFileDialog();
             fileDialogue.DefaultExt = ".xml";
  
@@ -245,6 +294,11 @@ namespace ComputingProject_UserInterface {
             
         }
 
+        /// <summary>
+        /// Brings up the open file dialogue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Open_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog fileBrowser = new OpenFileDialog();
             fileBrowser.DefaultExt = ".xml";
@@ -260,22 +314,34 @@ namespace ComputingProject_UserInterface {
 
                     ObjectsView.ItemsSource = null;
                     ObjectsView.ItemsSource = ObjectManager.AllObjects;
-
-                    ObjectsViewVelocityPosition.ItemsSource = null;
-                    ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
                 }
             }
         }
 
+        /// <summary>
+        /// Pauses the simulation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pause_Click(object sender, RoutedEventArgs e) {
             timeController.Pause();
         }
 
+        /// <summary>
+        /// Plays the simulation at the default speed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Play_Click(object sender, RoutedEventArgs e) {
             timeController.UnPause();
             timeController.DefaultSpeed();
         }
 
+        /// <summary>
+        /// Loads the solar system preset into the program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SolarSystem_Click(object sender, RoutedEventArgs e) {
             string filePath = ComputingProject_UserInterface.Resources.Preset.SolarSystem;
 
@@ -283,7 +349,7 @@ namespace ComputingProject_UserInterface {
             xmlObjects = Load.ReadXML(filePath);
 
             if (xmlObjects == null) {
-                MessageBox.Show("Invalid file.");
+                MessageBox.Show("Invalid file or file is empty.");
             }
             else {
                 ObjectManager.ClearObjects();
@@ -294,7 +360,7 @@ namespace ComputingProject_UserInterface {
 
                 ObjectsViewVelocityPosition.ItemsSource = null;
                 ObjectsViewVelocityPosition.ItemsSource = ObjectManager.AllObjects;
-            }
+            } 
         }
     }
 }

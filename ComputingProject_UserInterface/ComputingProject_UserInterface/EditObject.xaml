@@ -15,8 +15,8 @@
         <TextBox x:Name="MassTextBox" HorizontalAlignment="Left" Height="23" Margin="53,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" MaxLength="15"/>
 
         <Label x:Name="Position" Content="Position:" HorizontalAlignment="Left" Margin="-2,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
-        <TextBox x:Name="PositionXTextBox" HorizontalAlignment="Left" Height="22" Margin="53,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" MaxLength="4"/>
-        <TextBox x:Name="PositionYTextBox" HorizontalAlignment="Left" Height="22" Margin="110,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" MaxLength="4"/>
+        <TextBox x:Name="PositionXTextBox" HorizontalAlignment="Left" Height="22" Margin="53,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" MaxLength="4" ToolTip="In AU"/>
+        <TextBox x:Name="PositionYTextBox" HorizontalAlignment="Left" Height="22" Margin="110,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" MaxLength="4" ToolTip="In AU"/>
 
         <Label x:Name="Velocity" Content="Velocity:" HorizontalAlignment="Left" Margin="-2,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
         <TextBox x:Name="VelocityXTextBox" HorizontalAlignment="Left" Height="22" Margin="53,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" MaxLength="5"/>

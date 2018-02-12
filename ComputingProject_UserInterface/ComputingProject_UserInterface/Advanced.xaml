@@ -17,5 +17,11 @@
 
         <Label x:Name="LuminosityOfStar" Content="Luminosity of Star:" HorizontalAlignment="Left" Margin="6,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
         <TextBox x:Name="LuminosityOfStarTextBox" IsReadOnly="True" ToolTipService.ShowDuration="1500" HorizontalAlignment="Left" Height="22" Margin="120,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" MaxLength="15"/>
+
+        <Label x:Name="HabitableZone" Content="Habitable Zone:" HorizontalAlignment="Left" Margin="6,142,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
+        <Label x:Name="HabitableZoneInner" Content="Inner:" HorizontalAlignment="Left" Margin="119,142,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
+        <Label x:Name="HabitableZoneOuter" Content="Outer:" HorizontalAlignment="Left" Margin="116,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.123,-0.013"/>
+        <TextBox x:Name="HabitableZoneInnerTextBox" IsReadOnly="True" ToolTipService.ShowDuration="1500" HorizontalAlignment="Left" Height="22" Margin="156,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" MaxLength="15"/>
+        <TextBox x:Name="HabitableZoneOuterTextBox" IsReadOnly="True" ToolTipService.ShowDuration="1500" HorizontalAlignment="Left" Height="22" Margin="156,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" MaxLength="15"/>
     </Grid>
 </Window>
